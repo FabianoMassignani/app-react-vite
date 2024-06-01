@@ -7,7 +7,7 @@ export const AppHeader = () => {
         <div className="navbar">
           <div className="navbar-brand">
             <a href="/" className="navbar-item">
-              <h1>Logo</h1>
+              <h2>Logo</h2>
             </a>
           </div>
           <div className="navbar-menu">

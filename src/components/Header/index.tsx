@@ -5,8 +5,11 @@ export const AppHeader = () => {
     <div className="navbar-section">
       <div className="container">
         <div className="navbar">
-          <div className="navbar-logo"></div>
-
+          <div className="navbar-brand">
+            <a href="/" className="navbar-item">
+              <h1>Logo</h1>
+            </a>
+          </div>
           <div className="navbar-menu">
             <NavMenu />
           </div>

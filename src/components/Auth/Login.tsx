@@ -95,7 +95,7 @@ const _Login = (props: Props) => {
 
 const mapStateToProps = (state: AppState) => ({
     isAuthenticated: state.auth.isAuthenticated,
-    Loading: state.auth.Loading,
+    Loading: state.auth.loading,
 })
 
 const mapDispatchToProps = {

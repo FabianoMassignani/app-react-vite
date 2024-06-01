@@ -10,7 +10,7 @@ let userType: IUser = {
 }
 
 const initialState = {
-    loading: true,
+    loading: false,
     isAuthenticated: false,
     accessToken: null,
     user: userType,

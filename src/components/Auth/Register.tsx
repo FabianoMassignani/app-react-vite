@@ -5,15 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { register } from '../../actions/Auth.thunks'
 import { PATH } from '../../constants/paths'
 
-const mapStateToProps = (state: AppState) => ({
-    isAuthenticated: state.auth.isAuthenticated,
-})
 
-const mapDispatchToProps = {
-    register,
-}
-
-const connector = connect(mapStateToProps, mapDispatchToProps)
 interface Props extends ConnectedProps<typeof connector> { }
 
 const _Register = (props: Props) => {
@@ -113,5 +105,17 @@ const _Register = (props: Props) => {
         </div>
     )
 }
+
+const mapStateToProps = (state: AppState) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+})
+
+const mapDispatchToProps = {
+    register,
+}
+
+const connector = connect(mapStateToProps, mapDispatchToProps)
+
 const Register = connector(_Register)
+
 export { Register }

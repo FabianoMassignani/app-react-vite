@@ -4,16 +4,7 @@ import { logout } from '../../actions/Auth.thunks'
 import { connect, ConnectedProps } from 'react-redux'
 import { PATH } from '../../constants/paths'
 
-const mapStateToProps = (state: AppState) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  user: state.auth.user as IUser,
-})
 
-const mapDispatchToProps = {
-  logout,
-}
-
-const connector = connect(mapStateToProps, mapDispatchToProps)
 interface Props extends ConnectedProps<typeof connector> { }
 
 const _Menu = (props: Props) => {
@@ -38,6 +29,17 @@ const _Menu = (props: Props) => {
 
   return <>{isAuthenticated ? authLinks : null}</>
 }
+
+const mapStateToProps = (state: AppState) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  user: state.auth.user as IUser,
+})
+
+const mapDispatchToProps = {
+  logout,
+}
+
+const connector = connect(mapStateToProps, mapDispatchToProps)
 
 const NavMenu = connector(_Menu)
 

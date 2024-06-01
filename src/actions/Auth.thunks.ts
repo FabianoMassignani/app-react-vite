@@ -6,39 +6,25 @@ import { Dispatch } from 'redux'
 export const loadUser = () => async (dispatch: Dispatch) => {
     const userJson = localStorage.getItem('user') || '{}'
     const user = JSON.parse(userJson) as IUser
-    const accessToken = user.accessToken
-
-    if (!accessToken) {
-        dispatch(actions.authError())
-        return
-    }
 
     try {
-        const res = await axios.get(`${baseAPIUrl}/user/currentUser`, {
-            headers: {
-                Authorization: accessToken,
-            },
-        })
-
-        if (res) {
-            dispatch(
-                actions.userLoaded({ accessToken: accessToken, ...res.data })
-            )
+        if (user) {
+            dispatch(actions.userLoaded(user))
             return
         }
 
-        dispatch(actions.authError())
         return
     } catch (error) {
-        dispatch(actions.authError())
         return
     }
 }
 
-export const login = (payload: ReqLogin) => async (dispatch: Dispatch) => {
-    const { email, password } = payload
+export const login = (data: ReqLogin) => async (dispatch: Dispatch) => {
+    const { email, password } = data
 
     try {
+        dispatch(actions.login())
+
         const response = await axios.post(`${baseAPIUrl}/user/login`, {
             email,
             password,
@@ -57,18 +43,24 @@ export const login = (payload: ReqLogin) => async (dispatch: Dispatch) => {
     }
 }
 
-export const register =
-    (payload: ReqRegister) => async (dispatch: Dispatch) => {
-        try {
-            const res = await axios.post(`${baseAPIUrl}/user/register`, {
-                ...payload,
-            })
+export const register = (data: ReqRegister) => async (dispatch: Dispatch) => {
+    try {
+        dispatch(actions.register())
 
+        const res = await axios.post(`${baseAPIUrl}/user/register`, {
+            ...data,
+        })
+
+        if (res) {
             dispatch(actions.registerSuccess(res.data))
-        } catch (error: any) {
-            return dispatch(actions.registerFailed())
+            return
         }
+
+        return dispatch(actions.registerFailed())
+    } catch (error: any) {
+        return dispatch(actions.registerFailed())
     }
+}
 
 export const logout = () => async (dispatch: Dispatch) => {
     dispatch(actions.logoutSuccess())

@@ -5,16 +5,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { login } from '../../actions/Auth.thunks'
 import { PATH } from '../../constants/paths'
 
-const mapStateToProps = (state: AppState) => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    Loading: state.auth.Loading,
-})
-
-const mapDispatchToProps = {
-    login,
-}
-
-const connector = connect(mapStateToProps, mapDispatchToProps)
 interface Props extends ConnectedProps<typeof connector> { }
 
 const _Login = (props: Props) => {
@@ -102,6 +92,17 @@ const _Login = (props: Props) => {
         </div>
     )
 }
+
+const mapStateToProps = (state: AppState) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    Loading: state.auth.Loading,
+})
+
+const mapDispatchToProps = {
+    login,
+}
+
+const connector = connect(mapStateToProps, mapDispatchToProps)
 
 const Login = connector(_Login)
 

@@ -3,6 +3,8 @@ import { connect, ConnectedProps } from 'react-redux';
 import { loadUser, logout } from './actions/Auth.thunks';
 import { RoutesApp } from './routes';
 
+interface Props extends ConnectedProps<typeof connector> { }
+
 const _App = (props: Props) => {
     useEffect(() => {
         const { loadUser, logout } = props;
@@ -20,13 +22,12 @@ const _App = (props: Props) => {
 };
 
 const mapStateToProps = () => ({});
+
 const mapDispatchToProps = {
     loadUser,
     logout,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
-
-interface Props extends ConnectedProps<typeof connector> { }
 
 export const App = connector(_App);

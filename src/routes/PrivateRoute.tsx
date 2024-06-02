@@ -2,19 +2,15 @@ import { FunctionComponent } from 'react'
 import { Navigate } from 'react-router-dom'
 import { connect, ConnectedProps } from 'react-redux'
 
-interface RootState {
-    auth: {
-        isAuthenticated: boolean
-    }
-}
-interface OwnProps {
+
+interface PrivateRouteProps {
     element: JSX.Element
     path: string
 }
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-type Props = OwnProps & PropsFromRedux
+type Props = PrivateRouteProps & PropsFromRedux
 
 const PrivateRoute: FunctionComponent<Props> = ({
     isAuthenticated,
@@ -24,7 +20,7 @@ const PrivateRoute: FunctionComponent<Props> = ({
     return isAuthenticated ? element : <Navigate to={path} />
 }
 
-const mapStateToProps = (state: RootState) => ({
+const mapStateToProps = (state: AppState) => ({
     isAuthenticated: state.auth.isAuthenticated,
 })
 

@@ -20,13 +20,10 @@ export const authReducer = (state = initialState, action: ActionRedux) =>
     produce(state, (draft) => {
         switch (action.type) {
             case types.USER_LOADED:
+                localStorage.setItem('user', JSON.stringify(action.payload))
                 draft.isAuthenticated = true
                 draft.loading = false
-                draft.accessToken = action.payload.accessToken
-                draft.user = {
-                    ...action.payload.user,
-                    accessToken: action.payload.accessToken,
-                }
+                draft.user = action.payload
                 break
             case types.LOGIN:
                 draft.loading = true

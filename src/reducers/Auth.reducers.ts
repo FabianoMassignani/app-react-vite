@@ -32,6 +32,7 @@ export const authReducer = (state = initialState, action: ActionRedux) =>
                 localStorage.setItem('user', JSON.stringify(action.payload))
                 draft.isAuthenticated = true
                 draft.loading = false
+                draft.accessToken = action.payload.accessToken
                 draft.user = action.payload
                 break
             case types.LOGIN_FAILED:
@@ -44,6 +45,7 @@ export const authReducer = (state = initialState, action: ActionRedux) =>
                 localStorage.setItem('user', JSON.stringify(action.payload))
                 draft.isAuthenticated = true
                 draft.loading = false
+                draft.accessToken = action.payload.accessToken
                 draft.user = action.payload
                 break
             case types.REGISTER_FAILED:

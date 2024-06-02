@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { baseAPIUrl } from '../constants/urls'
+import { userAPIUrl } from '../constants/urls'
 import * as actions from './Auth.actions'
 import { Dispatch } from 'redux'
 
@@ -25,14 +25,14 @@ export const login = (data: ReqLogin) => async (dispatch: Dispatch) => {
     try {
         dispatch(actions.login())
 
-        const response = await axios.post(`${baseAPIUrl}/user/login`, {
+        const response = await axios.post(`${userAPIUrl}/login`, {
             email,
             password,
         })
 
         const user = response.data
 
-        if (user.auth) {
+        if (user.accessToken) {
             dispatch(actions.loginSuccess(user))
             return
         }
@@ -47,7 +47,7 @@ export const register = (data: ReqRegister) => async (dispatch: Dispatch) => {
     try {
         dispatch(actions.register())
 
-        const res = await axios.post(`${baseAPIUrl}/user/register`, {
+        const res = await axios.post(`${userAPIUrl}/register`, {
             ...data,
         })
 

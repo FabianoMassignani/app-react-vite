@@ -1,23 +1,26 @@
-import { Form, Input, Button, Checkbox } from 'antd'
-import { UserOutlined, LockOutlined } from '@ant-design/icons'
-import { connect, ConnectedProps } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { login } from '../../actions/Auth.thunks'
-import { PATH } from '../../constants/paths'
+import { Form, Input, Button, Checkbox } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { connect, ConnectedProps } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../../actions/Auth.thunks';
+import { PATH } from '../../constants/paths';
+import { useEffect } from 'react';
 
 interface Props extends ConnectedProps<typeof connector> { }
 
 const _Login = (props: Props) => {
-    const navigate = useNavigate()
-    const { login, isAuthenticated, Loading } = props
+    const navigate = useNavigate();
+    const { login, isAuthenticated, Loading } = props;
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate(PATH.PERFIL);
+        }
+    }, [isAuthenticated, navigate]);
 
     const onFinish = (values: any) => {
-        login(values)
-    }
-
-    if (isAuthenticated) {
-        navigate(PATH.PERFIL)
-    }
+        login(values);
+    };
 
     return (
         <div className="container">
@@ -90,20 +93,20 @@ const _Login = (props: Props) => {
                 </Form>
             </div>
         </div>
-    )
-}
+    );
+};
 
 const mapStateToProps = (state: AppState) => ({
     isAuthenticated: state.auth.isAuthenticated,
     Loading: state.auth.loading,
-})
+});
 
 const mapDispatchToProps = {
     login,
-}
+};
 
-const connector = connect(mapStateToProps, mapDispatchToProps)
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
-const Login = connector(_Login)
+const Login = connector(_Login);
 
-export { Login }
+export { Login };

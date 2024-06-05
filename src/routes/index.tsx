@@ -8,6 +8,7 @@ import { MainLayout } from '../pages/layouts/MainLayout'
 import HomePage from '../pages/HomePages/HomePage'
 import LoginPage from '../pages/AuthPages/LoginPage'
 import RegisterPage from '../pages/AuthPages/RegisterPage'
+import ProductPage from '../pages/ProductPages/ProductPage'
 import NotFoundPage from '../pages/ErrorPages/404Pages'
 
 export const RoutesApp = () => {
@@ -24,11 +25,13 @@ export const RoutesApp = () => {
                         />
 
                         <Route
-                            path={PATH.PERFIL}
+                            path={PATH.PRODUCT}
                             element={
                                 <PrivateRoute
-                                    path={PATH.PERFIL}
-                                    element={<></>}
+                                    path={PATH.HOME}
+                                    element={
+                                        <ProductPage />
+                                    }
                                 />
                             }
                         />

@@ -2,7 +2,6 @@ import { FunctionComponent } from 'react'
 import { Navigate } from 'react-router-dom'
 import { connect, ConnectedProps } from 'react-redux'
 
-
 interface PrivateRouteProps {
     element: JSX.Element
     path: string

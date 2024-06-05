@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { register } from '../../actions/Auth.thunks'
 import { PATH } from '../../constants/paths'
 
-interface Props extends ConnectedProps<typeof connector> { }
+interface Props extends ConnectedProps<typeof connector> {}
 
 const _Register = (props: Props) => {
     const navigate = useNavigate()
@@ -20,7 +20,7 @@ const _Register = (props: Props) => {
     }
 
     if (isAuthenticated) {
-        navigate(PATH.PERFIL)
+        navigate(PATH.PRODUCT)
     }
 
     return (

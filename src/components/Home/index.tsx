@@ -1,14 +1,13 @@
 import { connect, ConnectedProps } from 'react-redux'
-
 import { Login } from '../Auth/Login'
-
+import { ProductList } from '../Product/ProductList'
 
 interface Props extends ConnectedProps<typeof connector> { }
 
 const _Home = (props: Props) => {
-    const { loading, isAuthenticated } = props
+    const { isAuthenticated } = props
 
-    return <>{!loading && isAuthenticated ? <Login /> : <Login />}</>
+    return <>{!isAuthenticated ? <Login /> : <ProductList />}</>
 }
 
 const mapStateToProps = (state: AppState) => ({
